@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rinatlra Nabasa — LensRift</title>
+  <meta name="description" content="A curated portfolio of photography and cinematography work.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Apple-style page load curtain -->
+  <div class="curtain" aria-hidden="true"></div>
+
+  <div class="layout">
+
+    <!-- ══════════════════════════════════════
+                    SIDEBAR
+    ══════════════════════════════════════ -->
+    <aside class="sidebar">
+
+      <!-- Logo / identity -->
+      <div class="sidebar__logo">
+        <svg class="sidebar__logo-mark" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="21" cy="21" r="17" stroke="#1a1a1a" stroke-width="1.4" />
+          <circle cx="21" cy="21" r="8" stroke="#1a1a1a" stroke-width="1.4" />
+          <line x1="21" y1="4" x2="21" y2="13" stroke="#1a1a1a" stroke-width="1.4" />
+          <line x1="21" y1="29" x2="21" y2="38" stroke="#1a1a1a" stroke-width="1.4" />
+          <line x1="4" y1="21" x2="13" y2="21" stroke="#1a1a1a" stroke-width="1.4" />
+          <line x1="29" y1="21" x2="38" y2="21" stroke="#1a1a1a" stroke-width="1.4" />
+        </svg>
+        <div class="sidebar__name">Rinaltra Nabasa</div>
+      </div>
+
+      <!-- Photography categories -->
+      <p class="sidebar__section-label">Photography</p>
+      <nav class="sidebar__nav">
+        <a href="#" data-filter="all" class="active">All Work</a>
+      </nav>
+
+      <!-- Upload -->
+      <a href="#" class="sidebar__upload" data-upload="photography">+ Upload Work</a>
+
+      <!-- Bottom links -->
+      <div class="sidebar__bottom">
+        <a href="mailto:hello@yourdomain.com">Contact</a>
+        <a href="#">Instagram</a>
+        <a href="#">About</a>
+      </div>
+
+    </aside>
+
+    <!-- ══════════════════════════════════════
+                    MAIN
+    ══════════════════════════════════════ -->
+    <main class="main">
+
+      <!-- ── Hero ────────────────────────── -->
+      <section class="hero">
+        <p class="hero__eyebrow">Visual Storytelling</p>
+        <h1 class="hero__title">Light,<br><em>Captured.</em></h1>
+        <p class="hero__sub">A curated body of work across photography and cinematography — moments made permanent
+          through lens and light.</p>
+      </section>
+
+      <!-- ── Carousel ─────────────────────── -->
+      <section class="carousel-wrap">
+        <p class="carousel-label">Recent Work</p>
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide">
+              <img src="images/photo1.jpg" alt="Photo title">
+              <div class="carousel-slide__cap"><span>Photo Title</span></div>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="images/photo2.jpg" alt="Photo title">
+              <div class="carousel-slide__cap"><span>Photo Title</span></div>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="images/photo3.jpg" alt="Photo title">
+              <div class="carousel-slide__cap"><span>Photo Title</span></div>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="images/photo2.jpg" alt="Photo title">
+              <div class="carousel-slide__cap"><span>Photo Title</span></div>
+            </div>
+
+            <div class="carousel-slide">
+              <img src="images/photo3.jpg" alt="Photo title">
+              <div class="carousel-slide__cap"><span>Photo Title</span></div>
+            </div>
+
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="carouselPrev" aria-label="Previous">‹</button>
+          <div class="carousel-dots" id="carouselDots"></div>
+          <button class="carousel-btn" id="carouselNext" aria-label="Next">›</button>
+        </div>
+      </section>
+
+      <!-- ── Section header ───────────────── -->
+      <div class="section-header">
+        <h2 class="section-header__title">Gallery</h2>
+        <span class="section-header__count" id="photoCount">0 images</span>
+      </div>
+
+      <!-- ── Filters ──────────────────────── -->
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+
+      </div>
+
+      <!-- ── Masonry Gallery ───────────────── -->
+      <div class="masonry" id="gallery">
+
+        <!-- 24 placeholder tiles — replace with your uploads -->
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+        <div class="masonry-item masonry-item--placeholder visible"></div>
+
+      </div>
+      <!-- /masonry -->
+
+    </main>
+    <!-- /main -->
+  </div>
+  <!-- /layout -->
+
+  <!-- ══════════════════════════════════════
+                UPLOAD MODAL
+  ══════════════════════════════════════ -->
+  <div class="overlay" id="uploadOverlay">
+    <div class="modal">
+      <button class="modal__x" aria-label="Close">✕</button>
+      <h2 class="modal__title">Upload Work</h2>
+      <p class="modal__sub">Add images to your portfolio gallery.</p>
+
+      <div class="drop-zone" id="dropZone">
+        <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" y1="3" x2="12" y2="15" />
+        </svg>
+        <p>Drag & drop images here</p>
+        <span>or click to browse · JPEG, PNG, WEBP</span>
+        <input type="file" id="fileInput" multiple accept="image/*">
+      </div>
+
+      <div class="preview-grid" id="previewGrid"></div>
+
+      <div class="field">
+        <label for="titleInput">Title / Series</label>
+        <input type="text" id="titleInput" placeholder="e.g. Golden Hour, Tokyo Streets…">
+      </div>
+
+      <div class="field">
+        <label for="catSelect">Category</label>
+        <select id="catSelect">
+          <optgroup label="Photography">
+            <option value="portrait">Portrait</option>
+            <option value="landscape">Landscape</option>
+            <option value="street">Street</option>
+            <option value="documentary">Documentary</option>
+            <option value="abstract">Abstract</option>
+            <option value="bokeh">Bokeh</option>
+        </select>
+      </div>
+
+      <div class="modal__actions">
+        <button class="btn btn-ghost" id="uploadCancel">Cancel</button>
+        <button class="btn btn-dark" id="uploadSave">Save to Gallery</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+                  LIGHTBOX
+  ══════════════════════════════════════ -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" aria-label="Close">✕</button>
+    <button class="lightbox__nav lightbox__prev" aria-label="Previous">‹</button>
+    <img id="lbImg" src="" alt="">
+    <button class="lightbox__nav lightbox__next" aria-label="Next">›</button>
+    <div class="lightbox__info">
+      <h3 id="lbTitle"></h3>
+      <p id="lbMeta"></p>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
