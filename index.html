@@ -161,53 +161,6 @@
   <!-- /layout -->
 
   <!-- ══════════════════════════════════════
-                UPLOAD MODAL
-  ══════════════════════════════════════ -->
-  <div class="overlay" id="uploadOverlay">
-    <div class="modal">
-      <button class="modal__x" aria-label="Close">✕</button>
-      <h2 class="modal__title">Upload Work</h2>
-      <p class="modal__sub">Add images to your portfolio gallery.</p>
-
-      <div class="drop-zone" id="dropZone">
-        <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="17 8 12 3 7 8" />
-          <line x1="12" y1="3" x2="12" y2="15" />
-        </svg>
-        <p>Drag & drop images here</p>
-        <span>or click to browse · JPEG, PNG, WEBP</span>
-        <input type="file" id="fileInput" multiple accept="image/*">
-      </div>
-
-      <div class="preview-grid" id="previewGrid"></div>
-
-      <div class="field">
-        <label for="titleInput">Title / Series</label>
-        <input type="text" id="titleInput" placeholder="e.g. Golden Hour, Tokyo Streets…">
-      </div>
-
-      <div class="field">
-        <label for="catSelect">Category</label>
-        <select id="catSelect">
-          <optgroup label="Photography">
-            <option value="portrait">Portrait</option>
-            <option value="landscape">Landscape</option>
-            <option value="street">Street</option>
-            <option value="documentary">Documentary</option>
-            <option value="abstract">Abstract</option>
-            <option value="bokeh">Bokeh</option>
-        </select>
-      </div>
-
-      <div class="modal__actions">
-        <button class="btn btn-ghost" id="uploadCancel">Cancel</button>
-        <button class="btn btn-dark" id="uploadSave">Save to Gallery</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════
                   LIGHTBOX
   ══════════════════════════════════════ -->
   <div class="lightbox" id="lightbox">
