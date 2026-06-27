@@ -15,7 +15,7 @@ const fullGalleryData = [
     type: "image",
     url: "images/LeafMacroWater.JPG",
   },
-  { title: "Love", type: "image", url: "images/Love.JPG" },
+  { title: "Vintage Portrait", type: "image", url: "images/Love.JPG" },
   { title: "Moon Eclipse", type: "image", url: "images/MoonEclipse.jpg" },
   {
     title: "Shanghai Park Slow Shutter",
@@ -26,7 +26,7 @@ const fullGalleryData = [
   {
     title: "Bird Over The Water",
     type: "image",
-    url: "images/BirdOverTheWater.jpg",
+    url: "images/BirdOvertheWater.jpg",
   },
   { title: "Cathway Pacific", type: "image", url: "images/CathwayPacific.jpg" },
   {
@@ -72,7 +72,7 @@ const fullGalleryData = [
     type: "image",
     url: "images/DreamyArchitecture.jpg",
   },
-  { title: "Feo Smile", type: "image", url: "images/FeoSmile.JPG" },
+  { title: "Smiling to the Lens.", type: "image", url: "images/FeoSmile.JPG" },
   { title: "Golf View", type: "image", url: "images/GolfView.jpg" },
   { title: "Light Painting", type: "image", url: "images/LightPainting.jpg" },
   { title: "Macro Leaf", type: "image", url: "images/MacroLeaf.jpg" },
@@ -120,7 +120,6 @@ const fullGalleryData = [
     type: "image",
     url: "images/SimpleArchitecture.jpg",
   },
-  { title: "Wide Feo Shot", type: "image", url: "images/WideFeoShot.RAF" },
 ];
 
 if (typeof module !== "undefined" && module.exports) {
