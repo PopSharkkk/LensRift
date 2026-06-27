@@ -130,7 +130,8 @@ function openLightbox(url, title) {
             .lightbox-content { position: relative; max-width: 90vw; max-height: 85vh; display: flex; flex-direction: column; background-color: #131b2e; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow:hidden; }
             .lightbox-content img { max-width: 100%; max-height: 70vh; object-fit: contain; }
             .lightbox-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; z-index: 1001; }
-            .lightbox-info { padding: 20px; background-color: #131b2e; color: white; h3 { margin: 0; font-size: 1rem; font-weight: 500; } }
+            .lightbox-info { padding: 20px; background-color: #131b2e; color: white; }
+            .lightbox-info h3 { margin: 0; font-size: 1rem; font-weight: 500; }
         `;
     document.head.appendChild(styleElement);
   }
