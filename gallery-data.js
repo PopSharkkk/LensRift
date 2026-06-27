@@ -107,7 +107,11 @@ const fullGalleryData = [
     url: "images/EndofChineseBuilding.jpg",
   },
   { title: "Flower Macro", type: "image", url: "images/FlowerMacro.jpg" },
-  { title: "Kakaktua Wings", type: "image", url: "images/KakakTuaWings.jpg" },
+  {
+    title: "A Scarlett Macau soaring through the skies.",
+    type: "image",
+    url: "images/KakakTuaWings.jpg",
+  },
   {
     title: "Lizard On The Rock",
     type: "image",
