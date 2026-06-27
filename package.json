@@ -1,0 +1,25 @@
+{
+  "name": "lensrift",
+  "version": "1.0.0",
+  "description": "Lensrift - A minimalist photography portfolio website inspired by Apple's design aesthetic. Features Google Drive integration for easy content management.",
+  "main": "index.html",
+  "author": "Rinaltra Nabasa S",
+  "license": "MIT",
+  "keywords": [
+    "photography",
+    "portfolio",
+    "minimalist",
+    "apple-design",
+    "responsive",
+    "google-drive"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/lensrift"
+  },
+  "scripts": {
+    "dev": "echo 'Open index.html in your browser'",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "vercel"
+  }
+}
