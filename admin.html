@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - LensRift</title>
+    <!-- Editorial Typography: Inter & Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        .admin-container {
+            max-width: 500px;
+            margin: 180px auto 100px auto;
+            padding: 40px;
+            background-color: #ffffff;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        .admin-form { display: flex; flex-direction: column; gap: 24px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-muted); }
+        .form-control { 
+            padding: 12px 16px; 
+            background-color: var(--color-bg-paper); 
+            border: 1px solid var(--color-border); 
+            color: var(--color-text-ink); 
+            font-family: var(--font-sans); 
+            font-size: 1rem; 
+            border-radius: 0; 
+            outline: none; 
+        }
+        .form-control:focus { border-color: var(--color-text-ink); }
+        .btn-submit { 
+            padding: 16px; 
+            background-color: var(--color-text-ink); 
+            color: #fff; 
+            border: none; 
+            font-family: var(--font-sans); 
+            font-weight: 500; 
+            cursor: pointer; 
+            transition: opacity 0.2s; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            font-size: 0.85rem; 
+        }
+        .btn-submit:hover { opacity: 0.8; }
+        .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+        .hidden { display: none !important; }
+        #statusMessage { text-align: center; font-size: 0.9rem; margin-top: 16px; font-weight: 500; }
+    </style>
+</head>
+<body>
+    <!-- Clean Minimalist Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="images/lr-logo.png" alt="LR Logo" class="nav-logo-icon">
+                    <span>LensRift Admin</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Login View -->
+        <div id="authSection" class="admin-container">
+            <h2 style="font-family: var(--font-serif); font-weight: 400; font-size: 2.5rem; text-align: center; margin-bottom: 32px;">Portal Access</h2>
+            <form id="loginForm" class="admin-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" required placeholder="admin@lensrift.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn-submit">Sign In</button>
+            </form>
+        </div>
+
+        <!-- Upload View -->
+        <div id="uploadSection" class="admin-container hidden">
+            <h2 style="font-family: var(--font-serif); font-weight: 400; font-size: 2.5rem; text-align: center; margin-bottom: 32px;">Upload Media</h2>
+            <form id="uploadForm" class="admin-form">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" class="form-control" placeholder="e.g. Morning Light" required>
+                </div>
+                <div class="form-group">
+                    <label for="mediaType">Type</label>
+                    <select id="mediaType" class="form-control">
+                        <option value="photo">Photo</option>
+                        <option value="video">Video</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fileInput">File</label>
+                    <input type="file" id="fileInput" class="form-control" accept="image/*,video/*" required>
+                </div>
+                <button type="submit" id="uploadBtn" class="btn-submit">Upload to Archive</button>
+            </form>
+            <button id="logoutBtn" style="width: 100%; margin-top: 24px; background: transparent; color: var(--color-text-muted); border: none; cursor: pointer; text-decoration: underline; font-family: var(--font-sans);">Sign Out</button>
+        </div>
+
+        <div id="statusMessage"></div>
+    </div>
+
+    <!-- Supabase Upload Logic -->
+    <script>
+        const SUPABASE_URL = "https://haukswzimwkykhexxxnm.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdWtzd3ppbXdreWtoZXh4eG5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxMDU2MTYsImV4cCI6MjEwNDY4MTYxNn0.2avQp2MXXmTLeNDA7eH_tLxqVLsevq3sb3FODIq2j_E";
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const authSection = document.getElementById("authSection");
+        const uploadSection = document.getElementById("uploadSection");
+        const statusMessage = document.getElementById("statusMessage");
+
+        // Check Login Session state
+        async function checkSession() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                authSection.classList.add("hidden");
+                uploadSection.classList.remove("hidden");
+            } else {
+                authSection.classList.remove("hidden");
+                uploadSection.classList.add("hidden");
+            }
+        }
+        checkSession();
+
+        // Login Handler
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            statusMessage.innerText = "Authenticating...";
+            statusMessage.style.color = "var(--color-text-ink)";
+            
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const { error } = await supabase.auth.signInWithPassword({ email, password });
+            if (error) {
+                statusMessage.style.color = "#d32f2f"; // Red error text
+                statusMessage.innerText = error.message;
+            } else {
+                statusMessage.style.color = "#2e7d32"; // Green success text
+                statusMessage.innerText = "Logged in successfully.";
+                checkSession();
+            }
+        });
+
+        // Upload Handler
+        document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const uploadBtn = document.getElementById("uploadBtn");
+            uploadBtn.disabled = true;
+            uploadBtn.innerText = "Uploading...";
+            
+            statusMessage.style.color = "var(--color-text-ink)";
+            statusMessage.innerText = "Uploading to CDN...";
+
+            const title = document.getElementById("title").value;
+            const type = document.getElementById("mediaType").value;
+            const file = document.getElementById("fileInput").files[0];
+
+            if (!file) return;
+
+            // Generate unique filename asset key
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+            const filePath = `uploads/${fileName}`;
+
+            // 1. Upload asset to Supabase Storage Bucket
+            const { data: storageData, error: storageError } = await supabase.storage
+                .from('portfolio-media')
+                .upload(filePath, file);
+
+            if (storageError) {
+                statusMessage.style.color = "#d32f2f";
+                statusMessage.innerText = "Storage Error: " + storageError.message;
+                uploadBtn.disabled = false;
+                uploadBtn.innerText = "Upload to Archive";
+                return;
+            }
+
+            // 2. Fetch Public URL link from CDN
+            const { data: urlData } = supabase.storage
+                .from('portfolio-media')
+                .getPublicUrl(filePath);
+
+            const publicUrl = urlData.publicUrl;
+
+            // 3. Save entry row into PostgreSQL table
+            const { error: dbError } = await supabase
+                .from('media')
+                .insert([{ title, type, url: publicUrl }]);
+
+            if (dbError) {
+                statusMessage.style.color = "#d32f2f";
+                statusMessage.innerText = "Database Error: " + dbError.message;
+            } else {
+                statusMessage.style.color = "#2e7d32";
+                statusMessage.innerText = "Upload complete! Asset added to archive.";
+                document.getElementById("uploadForm").reset();
+            }
+            uploadBtn.disabled = false;
+            uploadBtn.innerText = "Upload to Archive";
+        });
+
+        // Logout Handler
+        document.getElementById("logoutBtn").addEventListener("click", async () => {
+            await supabase.auth.signOut();
+            statusMessage.innerText = "";
+            checkSession();
+        });
+    </script>
+</body>
+</html>

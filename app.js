@@ -1,6 +1,7 @@
-// Replace with your actual Supabase URL and ANON KEY
-const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+// LensRift Supabase Configuration
+const SUPABASE_URL = "https://haukswzimwkykhexxxnm.supabase.co";
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhhdWtzd3ppbXdreWtoZXh4eG5tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxMDU2MTYsImV4cCI6MjEwNDY4MTYxNn0.2avQp2MXXmTLeNDA7eH_tLxqVLsevq3sb3FODIq2j_E";
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,20 +19,25 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function loadMedia(container, typeFilter) {
-  let query = supabase.from('media').select('*').order('created_at', { ascending: false });
-  if (typeFilter === 'photo' || typeFilter === 'video') query = query.eq('type', typeFilter);
+  let query = supabase
+    .from("media")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (typeFilter === "photo" || typeFilter === "video")
+    query = query.eq("type", typeFilter);
 
   const { data, error } = await query;
   if (error || !data) return;
 
   container.innerHTML = "";
-  data.forEach(item => {
+  data.forEach((item) => {
     const itemEl = document.createElement("div");
     itemEl.className = "gallery-item";
 
-    const mediaTag = item.type === "video" 
-      ? `<video src="${item.url}" muted loop playsinline preload="metadata"></video>`
-      : `<img src="${item.url}" alt="${item.title}" loading="lazy">`;
+    const mediaTag =
+      item.type === "video"
+        ? `<video src="${item.url}" muted loop playsinline preload="metadata"></video>`
+        : `<img src="${item.url}" alt="${item.title}" loading="lazy">`;
 
     itemEl.innerHTML = `
       <div class="gallery-media-wrapper">${mediaTag}</div>
@@ -44,7 +50,10 @@ async function loadMedia(container, typeFilter) {
     if (item.type === "video") {
       const vid = itemEl.querySelector("video");
       itemEl.addEventListener("mouseenter", () => vid.play());
-      itemEl.addEventListener("mouseleave", () => { vid.pause(); vid.currentTime = 0; });
+      itemEl.addEventListener("mouseleave", () => {
+        vid.pause();
+        vid.currentTime = 0;
+      });
     }
 
     itemEl.addEventListener("click", () => openLightbox(item.url, item.type));
@@ -55,9 +64,10 @@ async function loadMedia(container, typeFilter) {
 function openLightbox(url, type) {
   const modal = document.createElement("div");
   modal.className = "lightbox-modal";
-  const mediaElement = type === "video" 
-    ? `<video src="${url}" controls autoplay></video>` 
-    : `<img src="${url}">`;
+  const mediaElement =
+    type === "video"
+      ? `<video src="${url}" controls autoplay></video>`
+      : `<img src="${url}">`;
 
   modal.innerHTML = `
     <div class="lightbox-content">
@@ -69,7 +79,12 @@ function openLightbox(url, type) {
   document.body.style.overflow = "hidden";
 
   const closeBtn = modal.querySelector(".lightbox-close");
-  const closeModal = () => { modal.remove(); document.body.style.overflow = ""; };
+  const closeModal = () => {
+    modal.remove();
+    document.body.style.overflow = "";
+  };
   closeBtn.addEventListener("click", closeModal);
-  modal.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
 }
